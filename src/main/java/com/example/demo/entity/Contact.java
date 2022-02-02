@@ -8,58 +8,71 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 
 @Entity
 public class Contact {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Integer id;
-	@NotNull
 	@NotBlank
-	@NotEmpty
-	@Length(min=3, max=25)
-	@Pattern(regexp = "^[a-z\sA-Z]")
-	String fname;
 	@NotNull
+	@Size(max = 25)
+	@Pattern(regexp ="^[a-zA-Z\s]+$")
+	private String firstName;
 	@NotBlank
-	@NotEmpty
-	@Length(min=3, max=25)
-	@Pattern(regexp = "^[a-z\sA-Z]")
-	String lName;
 	@NotNull
-	@NotBlank
-	String houseNumber;
-	String street;
+	@Size(max = 25)
+	@Pattern(regexp ="^[a-zA-Z\s]+$")
+	private String lastName;
+	@Range(min = 0)
 	@NotNull
+	private Integer age;
 	@NotBlank
-	String city;
 	@NotNull
+	@Pattern(regexp = "^[a-zA-Z0-9]*$")
+	@Size(max = 7)
+	private String houseNumber;
 	@NotBlank
-	@Length(min=6)
-	Integer pin;
 	@NotNull
+	@Size(max = 50)
+	private String street;
 	@NotBlank
-	@NotEmpty
-	Integer age;
+	@NotNull
+	@Size(max = 25)
+	@Pattern(regexp ="^[a-zA-Z\s]+$")
+	private String city;
+	@NotBlank
+	@NotNull
+	@Pattern(regexp = "[0-9 ]+")
+	@Size(max = 7)
+	private String pin;
+	
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getFname() {
-		return fname;
+	
+	
+	public String getFirstName() {
+		return firstName;
 	}
-	public void setFname(String fname) {
-		this.fname = fname;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
-	public String getlName() {
-		return lName;
+	public String getLastName() {
+		return lastName;
 	}
-	public void setlName(String lName) {
-		this.lName = lName;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public void setPin(String pin) {
+		this.pin = pin;
 	}
 	public String getHouseNumber() {
 		return houseNumber;
@@ -79,12 +92,9 @@ public class Contact {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	public Integer getPin() {
-		return pin;
-	}
-	public void setPin(Integer pin) {
-		this.pin = pin;
-	}
+
+	
+	
 	public Integer getAge() {
 		return age;
 	}
